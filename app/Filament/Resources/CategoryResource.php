@@ -34,7 +34,7 @@ class CategoryResource extends Resource
                     }),
                 TextInput::make('slug')->required()->unique(ignoreRecord: true)->minLength(3)->maxLength(150),
                 TextInput::make('text_color')->nullable(),
-                TextInput::make('bg-color')->nullable(),
+                TextInput::make('bg_color')->nullable(),
             ]);
     }
 
