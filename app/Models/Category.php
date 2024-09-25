@@ -11,4 +11,9 @@ class Category extends Model
 
     // protected $fillable = ['title', 'slug', 'text_color', 'bg_color'];
     protected $guared = [];
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }

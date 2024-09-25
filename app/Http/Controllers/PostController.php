@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use Illuminate\Http\Request;
+use App\Models\Category;
 
 class PostController extends Controller
 {
     public function index()
     {
+        $categories =
+            Category::take(10)
+                ->whereHas('posts', function($query) {
+                    $query->published();
+                })
+                ->get();
+
         return view('posts.index', [
-            'posts' => Post::take(5)->get()
+            'categories' => $categories
         ]);
     }
 }

@@ -1,10 +1,22 @@
-<div class=" px-3 lg:px-7 py-6">
-    <div class="flex justify-between items-center border-b border-gray-100">
+<div class="px-3 py-6 lg:px-7">
+    <div class="flex items-center justify-between border-b border-gray-100">
         <div>
+            @if ($this->activeCategory || $search)
+                <button class="px-2 text-xs text-red-400 border rounded" wire:click="clearFilters">X</button>
+            @endif
+            @if ($this->activeCategory)
+                All posts from:
+                <x-badge
+                    wire:navigate
+                    href="{{ route('posts.index', ['category' => $this->activeCategory->slug]), }}"
+                    :textColor="$this->activeCategory->text_color"
+                    :bgColor="$this->activeCategory->bg_color"
+                >
+                    {{ $this->activeCategory->title }}
+                </x-badge>
+            @endif
             @if ($search)
-                Searching for: <span class="font-bold">{{ $this->search }}</span> ({{ count($this->posts) }} result{{ (count($this->posts) > 1) | !count($this->posts) ? 's' : '' }})
-
-                <button class="border rounded px-2" wire:click="clearSearch">Clear Search</button>
+                Containing: {{ $this->search }}
             @endif
         </div>
         <div class="flex items-center space-x-4 font-light ">
