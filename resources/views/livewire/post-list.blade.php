@@ -5,7 +5,6 @@
                 <button class="px-2 text-xs text-red-400 border rounded" wire:click="clearFilters">X</button>
             @endif
             @if ($this->activeCategory)
-                All posts from:
                 <x-badge
                     wire:navigate
                     href="{{ route('posts.index', ['category' => $this->activeCategory->slug]), }}"
@@ -16,7 +15,7 @@
                 </x-badge>
             @endif
             @if ($search)
-                Containing: {{ $this->search }}
+                Containing: <strong>{{ $this->search }}</strong>
             @endif
         </div>
         <div class="flex items-center space-x-4 font-light ">
