@@ -3,7 +3,7 @@
 <article class="[&:not(:last-child)]:border-b border-gray-100 pb-10">
     <div class="grid items-start grid-cols-12 gap-3 mt-5 article-body">
         <div class="flex items-center col-span-4 article-thumbnail">
-            <a href="">
+            <a wire:navigate href="{{ route('posts.show', $post->slug) }}">
                 <img
                     class="mx-auto mw-100 rounded-xl"
                     src="{{ $post->getThumbnailUrl() }}"
@@ -13,14 +13,13 @@
         </div>
         <div class="col-span-8">
             <div class="flex items-center py-1 text-sm article-meta">
-                <img class="mr-3 rounded-full w-7 h-7"
-                    src="{{ $post->author->profile_photo_url }}"
-                    :alt="$post->author->name">
-                <span class="mr-1 text-xs">{{ $post->author->name }}</span>
+
+                <x-posts.author :author="$post->author" size="lg"/>
+
                 <span class="text-xs text-gray-500">. {{ $post->published_at->diffForHumans() }}</span>
             </div>
             <h2 class="text-xl font-bold text-gray-900">
-                <a href="http://127.0.0.1:8000/blog/first%20post" >
+                <a wire:navigate href="{{ route('posts.show', $post->slug) }}" >
                     {{ $post->title }}
                 </a>
             </h2>
@@ -31,14 +30,7 @@
             <div class="flex items-center justify-between mt-6 article-actions-bar">
                 <div class="flex justify-between w-full">
                     @foreach ($post->categories as $cat)
-                        <x-badge
-                            wire:navigate
-                            href="{{ route('posts.index', ['category' => $cat->title]), }}"
-                            :textColor="$cat->text_color"
-                            :bgColor="$cat->bg_color"
-                        >
-                            {{ $cat->title }}
-                        </x-badge>
+                        <x-posts.category-badge :category="$cat"/>
                     @endforeach
                     <div class="flex items-center mr-2 space-x-4">
                         <span class="text-sm text-gray-500">{{ $post->getReadingTime() }} min read</span>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Category;
 
 class PostController extends Controller
@@ -17,6 +18,13 @@ class PostController extends Controller
 
         return view('posts.index', [
             'categories' => $categories
+        ]);
+    }
+
+    public function show(Post $post)
+    {
+        return view('posts.show', [
+            'post' => $post
         ]);
     }
 }

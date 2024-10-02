@@ -1,7 +1,7 @@
 @props(['post'])
 
 <div {{ $attributes }}>
-    <a href="#">
+    <a wire:navigate href="{{ route('posts.show', $post->slug) }}">
         <div>
             <img
                 class="w-full rounded-xl"
@@ -12,18 +12,13 @@
     <div class="mt-3">
         <div class="flex items-center justify-between mb-2">
             @if ($category = $post->categories()->first())
-                <x-badge
-                    wire:navigate
-                    href="{{ route('posts.index', ['category' => $category->slug]), }}"
-                    :textColor="$category->text_color"
-                    :bgColor="$category->bg_color"
-                >
-                    {{ $category->title }}
-                </x-badge>
+                <x-posts.category-badge :category="$cat"/>
             @endif
             <p class="text-sm text-gray-500">{{ $post->published_at }}</p>
         </div>
         <a
+            wire:navigate
+            href="{{ route('posts.show', $post->slug) }}"
             class="text-xl font-bold text-gray-900"
         >
             {{ $post->title }}
