@@ -1,4 +1,6 @@
-<x-app-layout>
+<x-app-layout
+    title="All Posts"
+>
 
     <div class="grid w-full grid-cols-4 gap-10">
         <div class="col-span-4 md:col-span-3">

@@ -1,4 +1,6 @@
-<x-app-layout>
+<x-app-layout
+    title="{{ $post->title }}"
+>
 
     <article class="w-full col-span-4 py-5 mx-auto mt-10 md:col-span-3" style="max-width:700px">
         <img class="w-full my-2 rounded-lg" src="{{ $post->getThumbnailUrl() }}" alt="{{ $post->title }}">
