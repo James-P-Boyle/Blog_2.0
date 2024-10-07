@@ -52,9 +52,9 @@ class PostList extends Component
             ->when($this->activeCategory, function ($query) {
                 $query->withCategory($this->category);
             })
-            ->when($this->popular, function ($query) {
-                $query->popular();
-            })
+            // ->when($this->popular, function ($query) {
+            //     $query->popular();
+            // })
             ->search($this->search)
             ->orderBy('published_at', $this->sort)
             ->simplePaginate(5);
