@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class PostController extends Controller
 {
     public function index()
     {
         $categories =
-            Category::take(10)
-                ->whereHas('posts', function($query) {
+        Cache::remember('categories', Carbon::now()->addDay(), function () {
+            return Category::whereHas('posts', function($query) {
                     $query->published();
                 })
+                ->take(10)
                 ->get();
+        });
 
         return view('posts.index', [
             'categories' => $categories
