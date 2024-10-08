@@ -11,7 +11,7 @@
     </a>
     <div class="mt-3">
         <div class="flex items-center justify-between mb-2">
-            @if ($category = $post->categories()->first())
+            @if ($category = $post->categories->first())
                 <x-posts.category-badge :category="$category"/>
             @endif
             <p class="text-sm text-gray-500">{{ $post->published_at }}</p>
