@@ -15,24 +15,24 @@
                 </x-badge>
             @endif
             @if ($search)
-                Containing: <strong>{{ $this->search }}</strong>
+                {{ __('blog.containing') }} <strong>{{ $this->search }}</strong>
             @endif
         </div>
         <div class="flex items-center space-x-4 font-light ">
-            <x-label>Popular</x-label>
+            <x-label>{{ __('blog.filter.popular') }}</x-label>
             <x-checkbox wire:model.live="popular"/>
             <button
                 class="py-4 {{ $sort === 'desc' ? 'border-b border-yellow-500 text-gray-900' : 'text-gray-500' }}"
                 wire:click="setSort('desc')"
             >
-                Latest
+            {{ __('blog.filter.latest') }}
             </button>
             <button
                 class="py-4 {{ $sort === 'asc' ? 'border-b border-yellow-500 text-gray-900' : 'text-gray-500' }}"
                 :class=""
                 wire:click="setSort('asc')"
             >
-                Oldest
+            {{ __('blog.filter.oldest') }}
             </button>
         </div>
     </div>
